@@ -43,6 +43,14 @@ def merge_multiple_dataframe():
     except FileNotFoundError:
         os.mkdir(output_folder_path)
         data.to_csv(data_path, index=False)
+
+    # saving a record of the ingestion
+    record_path = os.path.join(output_folder_path, 'ingestedfiles.txt')
+    with open(record_path, 'w') as f:
+        for file in filenames:
+            f.write(file + '\n')
+    logger.info(f"record of ingestion saved in {record_path}")
+
     return data
 
     
