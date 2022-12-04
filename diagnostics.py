@@ -12,10 +12,12 @@ with open('config.json','r') as f:
 model_path = os.path.join(config['prod_deployment_path'])
 test_data_path = os.path.join(config['test_data_path'])  
 
-##################Function to get model predictions
 def model_predictions():
-    #read the deployed model and a test dataset, calculate predictions
-    #read the deployed model and a test dataset, calculate predictions
+    """
+    Function to get model predictions - read the deployed model and a test dataset, calculate predictions
+    Input: deployed model, test dataset, 
+    output: predictions
+    """
     model = load(os.path.join(model_path, "trainedmodel.pkl"))
     encoder = load(os.path.join(model_path, "encoder.pkl"))
     
@@ -28,12 +30,23 @@ def model_predictions():
 
     return y_pred, df_y
 
-##################Function to get summary statistics
 def dataframe_summary():
-    #calculate summary statistics here
+    """Function to calculate the summary statistics
+    Otput: list containing all summary statistics
+    """
+    df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
+    numeric_columns = [
+        "lastmonth_activity",
+        "lastyear_activity",
+        "number_of_employees"
+        ]
     
-    
-    return #return value should be a list containing all summary statistics
+    result = []
+    for column in numeric_columns:
+        result.append([column, "mean", df[column].mean()])
+        result.append([column, "median", df[column].median()])
+        result.append([column, "standard deviation", df[column].std()])
+    return result
 
 ##################Function to get timings
 def execution_time():
