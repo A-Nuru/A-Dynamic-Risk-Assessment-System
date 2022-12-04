@@ -17,7 +17,7 @@ dataset_csv_path = os.path.join(config['output_folder_path'])
 model_path = os.path.join(config['output_model_path']) 
 
 def train_model():
-    """Function for training the 'model"""
+    """Function for training the model"""
     df = pd.read_csv(os.path.join(dataset_csv_path, "finaldata.csv"))
     df_x, df_y, encoder = preprocess_data(df, None)
     x_train, x_test, y_train, y_test = train_test_split(df_x, df_y, test_size=0.20)
@@ -29,7 +29,10 @@ def train_model():
                     warm_start=False)
     
     #fit the logistic regression to your data
+    model.fit(x_train, y_train)
     
+    print(model.score(x_train, y_train))
+    print(model.score(x_test, y_test))
     
     #write the trained model to your workspace in a file called trainedmodel.pkl
 
