@@ -34,7 +34,13 @@ def score_model():
     df_x, df_y, _ = preprocess_data(df, encoder)
 
     y_pred = model.predict(df_x)
-      
+    
+    f1 = metrics.f1_score(df_y, y_pred)
+
+    with open(os.path.join(model_path, "latestscore.txt"), "w") as score_file:
+        score_file.write(str(f1) + "\n")
+    
+    return f1
 
 if __name__ == "__main__":
     score_model()
