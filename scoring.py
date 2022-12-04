@@ -26,6 +26,15 @@ def score_model():
     model = load(os.path.join(model_path, "trainedmodel.pkl"))
     encoder = load(os.path.join(model_path, "encoder.pkl"))
     
+    if production :
+        df = pd.read_csv(os.path.join(output_folder_path, "finaldata.csv"))
+    else:
+        df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
+
+    df_x, df_y, _ = preprocess_data(df, encoder)
+
+    y_pred = model.predict(df_x)
+      
 
 if __name__ == "__main__":
     score_model()
