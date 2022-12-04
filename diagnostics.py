@@ -32,7 +32,7 @@ def model_predictions():
 
 def dataframe_summary():
     """Function to calculate the summary statistics
-    Otput: list containing all summary statistics
+    Output: result - list containing all summary statistics
     """
     df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
     numeric_columns = [
@@ -48,10 +48,19 @@ def dataframe_summary():
         result.append([column, "standard deviation", df[column].std()])
     return result
 
-##################Function to get timings
+
 def execution_time():
-    #calculate timing of training.py and ingestion.py
-    return #return a list of 2 timing values in seconds
+    """
+    Function to get timings - calculate timing of training.py and ingestion.py
+    output: result - list of 2 timing values in seconds
+    """
+    result = []
+    for procedure in ["training.py" , "ingestion.py"]:
+        starttime = timeit.default_timer()
+        os.system('python3 %s' % procedure)
+        timing=timeit.default_timer() - starttime
+        result.append([procedure, timing])
+    return result
 
 ##################Function to check dependencies
 def outdated_packages_list():
