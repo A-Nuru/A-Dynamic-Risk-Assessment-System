@@ -15,11 +15,24 @@ test_data_path = os.path.join(config['test_data_path'])
 ##################Function to get model predictions
 def model_predictions():
     #read the deployed model and a test dataset, calculate predictions
-    return #return value should be a list containing all predictions
+    #read the deployed model and a test dataset, calculate predictions
+    model = load(os.path.join(model_path, "trainedmodel.pkl"))
+    encoder = load(os.path.join(model_path, "encoder.pkl"))
+    
+    if dataset_path is None: dataset_path = "testdata.csv"
+    df = pd.read_csv(os.path.join(test_data_path, dataset_path))
+
+    df_x, df_y, _ = preprocess_data(df, encoder)
+
+    y_pred = model.predict(df_x)
+
+    return y_pred, df_y
 
 ##################Function to get summary statistics
 def dataframe_summary():
     #calculate summary statistics here
+    
+    
     return #return value should be a list containing all summary statistics
 
 ##################Function to get timings
