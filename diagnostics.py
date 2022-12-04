@@ -46,8 +46,8 @@ def dataframe_summary():
         result.append([column, "mean", df[column].mean()])
         result.append([column, "median", df[column].median()])
         result.append([column, "standard deviation", df[column].std()])
+    print(result)
     return result
-
 
 def execution_time():
     """
@@ -60,6 +60,23 @@ def execution_time():
         os.system('python3 %s' % procedure)
         timing=timeit.default_timer() - starttime
         result.append([procedure, timing])
+    print(result)
+    return result
+
+def missing_data():
+    """Function to check data missing data - calculates percentage of missing data
+    Output: result - list of percentage of missing data for each column in the dataset
+    """
+    df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
+    
+    result = []
+    for column in df.columns:
+        count_na = df[column].isna().sum()
+        count_not_na = df[column].count()
+        count_total = count_not_na + count_na
+
+        result.append([column, str(int(count_na/count_total*100))+"%"])
+    print(result)
     return result
 
 ##################Function to check dependencies
