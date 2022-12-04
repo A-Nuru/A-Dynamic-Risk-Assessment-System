@@ -4,15 +4,20 @@ import numpy as np
 import timeit
 import os
 import json
+from joblib import load
+#from scipy.sparse import data
+from features import preprocess_data
+import subprocess
+import sys
 
-##################Load config.json and get environment variables
+#Load config.json and get environment variables
 with open('config.json','r') as f:
     config = json.load(f) 
 
 model_path = os.path.join(config['prod_deployment_path'])
 test_data_path = os.path.join(config['test_data_path'])  
 
-def model_predictions():
+def model_predictions(dataset_path):
     """
     Function to get model predictions - read the deployed model and a test dataset, calculate predictions
     Input: deployed model, test dataset, 
@@ -79,15 +84,20 @@ def missing_data():
     print(result)
     return result
 
-##################Function to check dependencies
 def outdated_packages_list():
-    #get a list of 
-
+    """
+    Function to check dependencies
+    Output: outdated_packages, string
+    """
+    outdated_packages = subprocess.check_output(['pip', 'list', '--outdated']).decode(sys.stdout.encoding)
+    print(outdated_packages)
+    return str(outdated_packages)
 
 if __name__ == '__main__':
-    model_predictions()
+    model_predictions(None)
     dataframe_summary()
     execution_time()
+    missing_data()
     outdated_packages_list()
 
 
