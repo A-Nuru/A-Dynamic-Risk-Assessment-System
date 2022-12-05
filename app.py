@@ -43,11 +43,16 @@ def stats():
     score = score_model()
     return str(score)
 
-#######################Summary Statistics Endpoint
+#Summary Statistics Endpoint
 @app.route("/summarystats", methods=['GET','OPTIONS'])
 def stats():        
-    #check means, medians, and modes for each column
-    return #return a list of all calculated summary statistics
+    """
+    Function to check summary statistics - check means, medians, and modes for each column and return a list of all calculated summary statistics
+    Input: None
+    Output: summary, list of lists
+    """
+    summary = dataframe_summary()
+    return str(summary)
 
 #######################Diagnostics Endpoint
 @app.route("/diagnostics", methods=['GET','OPTIONS'])
