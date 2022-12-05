@@ -21,7 +21,8 @@ def score_model():
     """
     Function for reporting - calculate a confusion matrix using the test data and the deployed model, and write the confusion matrix to the workspace"""
     y_pred, df_y = model_predictions(None)
-     
+    df_cm = metrics.confusion_matrix(df_y, y_pred)
+    
 
 if __name__ == '__main__':
     score_model()
