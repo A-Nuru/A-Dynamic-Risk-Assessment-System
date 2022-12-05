@@ -7,10 +7,10 @@ import diagnosis
 import predict_exited_from_saved_model
 import json
 import os
+from diagnostics import model_predictions, dataframe_summary, missing_data, outdated_packages_list, execution_time
+from scoring import score_model
 
-
-
-######################Set up variables for use in our script
+#Set up variables for use in our script
 app = Flask(__name__)
 app.secret_key = '1652d576-484a-49fd-913a-6879acfa6ba4'
 
@@ -21,13 +21,17 @@ dataset_csv_path = os.path.join(config['output_folder_path'])
 
 prediction_model = None
 
-
-#######################Prediction Endpoint
+#Prediction Endpoint
 @app.route("/prediction", methods=['POST','OPTIONS'])
 def predict():        
-    #call the prediction function you created in Step 3
-    return #add return value for prediction outputs
-
+    """
+    Function to make predictions -call the prediction function
+    Output: y_pred, list
+    """
+    dataset_path = request.json.get('dataset_path')
+    y_pred, _ = model_predictions(dataset_path)
+    return str(y_pred)
+    
 #######################Scoring Endpoint
 @app.route("/scoring", methods=['GET','OPTIONS'])
 def stats():        
