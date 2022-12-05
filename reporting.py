@@ -7,8 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import json
 import os
-
-
+from diagnostics import model_predictions
 
 #Load config.json and get path variables
 with open('config.json','r') as f:
