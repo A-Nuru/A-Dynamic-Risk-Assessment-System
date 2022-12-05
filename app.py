@@ -32,11 +32,16 @@ def predict():
     y_pred, _ = model_predictions(dataset_path)
     return str(y_pred)
     
-#######################Scoring Endpoint
+#Scoring Endpoint
 @app.route("/scoring", methods=['GET','OPTIONS'])
 def stats():        
-    #check the score of the deployed model
-    return #add return value (a single F1 score number)
+    """
+    Function to score model - check the score of the deployed model by calling the score_model function
+    Input: None
+    Output: score, string
+    """
+    score = score_model()
+    return str(score)
 
 #######################Summary Statistics Endpoint
 @app.route("/summarystats", methods=['GET','OPTIONS'])
