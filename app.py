@@ -2,9 +2,6 @@ from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
 import pickle
-import create_prediction_model
-import diagnosis 
-import predict_exited_from_saved_model
 import json
 import os
 from diagnostics import model_predictions, dataframe_summary, missing_data, outdated_packages_list, execution_time
@@ -49,16 +46,23 @@ def stats():
     """
     Function to check summary statistics - check means, medians, and modes for each column and return a list of all calculated summary statistics
     Input: None
-    Output: summary, list of lists
+    Output: summary, string
     """
     summary = dataframe_summary()
     return str(summary)
 
-#######################Diagnostics Endpoint
+#Diagnostics Endpoint
 @app.route("/diagnostics", methods=['GET','OPTIONS'])
 def stats():        
-    #check timing and percent NA values
-    return #add return value for all diagnostics
+    """
+    Function to check diagnostics - check timing, percent NA values abd outdated packages
+    Input: None
+    Output: value for all diagnostics
+    """
+    et = execution_time()
+    md = missing_data()
+    op = outdated_packages_list()    
+    return str("execution_time:" + et + "\nmissing_data;"+ md + "\noutdated_packages:" + op)
 
 if __name__ == "__main__":    
     app.run(host='0.0.0.0', port=8000, debug=True, threaded=True)
