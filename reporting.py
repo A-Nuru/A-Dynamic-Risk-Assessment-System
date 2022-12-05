@@ -10,21 +10,18 @@ import os
 
 
 
-###############Load config.json and get path variables
+#Load config.json and get path variables
 with open('config.json','r') as f:
     config = json.load(f) 
 
 model_path = os.path.join(config['output_model_path'])
 test_data_path = os.path.join(config['test_data_path']) 
 
-##############Function for reporting
 def score_model():
-    #calculate a confusion matrix using the test data and the deployed model
-    #write the confusion matrix to the workspace
-
-
-
-
+    """
+    Function for reporting - calculate a confusion matrix using the test data and the deployed model, and write the confusion matrix to the workspace"""
+    y_pred, df_y = model_predictions(None)
+     
 
 if __name__ == '__main__':
     score_model()
