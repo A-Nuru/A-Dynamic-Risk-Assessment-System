@@ -20,8 +20,8 @@ test_data_path = os.path.join(config['test_data_path'])
 def model_predictions(dataset_path):
     """
     Function to get model predictions - read the deployed model and a test dataset, calculate predictions
-    Input: deployed model, test dataset, 
-    output: predictions
+    Input: dataset_path, string
+    output: y_pred, df_y
     """
     model = load(os.path.join(model_path, "trainedmodel.pkl"))
     encoder = load(os.path.join(model_path, "encoder.pkl"))
@@ -37,6 +37,7 @@ def model_predictions(dataset_path):
 
 def dataframe_summary():
     """Function to calculate the summary statistics
+    Input: None
     Output: result - list containing all summary statistics
     """
     df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
@@ -57,7 +58,8 @@ def dataframe_summary():
 def execution_time():
     """
     Function to get timings - calculate timing of training.py and ingestion.py
-    output: result - list of 2 timing values in seconds
+    Input: None
+    output: result, string of list of 2 timing values in seconds
     """
     result = []
     for procedure in ["training.py" , "ingestion.py"]:
@@ -66,10 +68,11 @@ def execution_time():
         timing=timeit.default_timer() - starttime
         result.append([procedure, timing])
     print(result)
-    return result
+    return string(result)
 
 def missing_data():
     """Function to check data missing data - calculates percentage of missing data
+    Input: None
     Output: result - list of percentage of missing data for each column in the dataset
     """
     df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
@@ -82,7 +85,7 @@ def missing_data():
 
         result.append([column, str(int(count_na/count_total*100))+"%"])
     print(result)
-    return result
+    return string(result)
 
 def outdated_packages_list():
     """
