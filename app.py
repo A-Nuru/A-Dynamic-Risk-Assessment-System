@@ -31,7 +31,7 @@ def predict():
     
 #Scoring Endpoint
 @app.route("/scoring", methods=['GET','OPTIONS'])
-def stats():        
+def score():        
     """
     Function to score model - check the score of the deployed model by calling the score_model function
     Input: None
@@ -53,7 +53,7 @@ def stats():
 
 #Diagnostics Endpoint
 @app.route("/diagnostics", methods=['GET','OPTIONS'])
-def stats():        
+def diagnose():        
     """
     Function to check diagnostics - check timing, percent NA values abd outdated packages
     Input: None
