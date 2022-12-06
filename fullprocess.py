@@ -6,6 +6,10 @@ import deployment
 import diagnostics
 import reporting
 
+input_folder_path = config["input_folder_path"]
+prod_deployment_path = os.path.join(config['prod_deployment_path'])
+model_path = os.path.join(config['output_model_path'])
+
 ##################Check and read new data
 #first, read ingestedfiles.txt
 
