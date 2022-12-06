@@ -29,7 +29,7 @@ def score_model(production=False):
     encoder = load(os.path.join(model_path, "encoder.pkl"))
     
     if production:
-        df = pd.read_csv(os.path.join(output_folder_path, "finaldata.csv"))
+        df = pd.read_csv(os.path.join(dataset_csv_path, "finaldata.csv"))
     else:
         df = pd.read_csv(os.path.join(test_data_path, "testdata.csv"))
         print(df)
