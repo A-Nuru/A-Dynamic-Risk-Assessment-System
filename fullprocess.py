@@ -12,6 +12,10 @@ model_path = os.path.join(config['output_model_path'])
 
 ##################Check and read new data
 #first, read ingestedfiles.txt
+ingested_files =[]
+with open(os.path.join(prod_deployment_path, "ingestedfiles.txt"), "r") as report_file:
+    for line in report_file:
+        ingested_files.append(line.rstrip())
 
 #second, determine whether the source data folder has files that aren't listed in ingestedfiles.txt
 
