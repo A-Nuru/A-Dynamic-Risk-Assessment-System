@@ -18,8 +18,10 @@ with open(os.path.join(prod_deployment_path, "ingestedfiles.txt"), "r") as repor
         ingested_files.append(line.rstrip())
 
 #second, determine whether the source data folder has files that aren't listed in ingestedfiles.txt
-
-
+new_files = False
+for filename in os.listdir(input_folder_path):
+    if input_folder_path + "/" + filename not in ingested_files:
+        new_files = True
 
 ##################Deciding whether to proceed, part 1
 #if you found new data, you should proceed. otherwise, do end the process here
