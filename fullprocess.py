@@ -5,6 +5,9 @@ import scoring
 import deployment
 import diagnostics
 import reporting
+import ingestion
+import json
+import os
 
 input_folder_path = config["input_folder_path"]
 prod_deployment_path = os.path.join(config['prod_deployment_path'])
@@ -31,7 +34,14 @@ if not new_files:
 
 ##################Checking for model drift
 #check whether the score from the deployed model is different from the score from the model that uses the newest ingested data
+ingestion.merge_multiple_dataframe()
+scoring.score_model(production=True)
 
+with open(os.path.join(prod_deployment_path, "latestscore.txt"), "r") as report_file:
+    old_f1 = float(report_file.read())
+
+with open(os.path.join(model_path, "latestscore.txt"), "r") as report_file:
+    new_f1 = float(report_file.read())
 
 ##################Deciding whether to proceed, part 2
 #if you found model drift, you should proceed. otherwise, do end the process here
