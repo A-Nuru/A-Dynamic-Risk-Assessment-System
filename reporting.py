@@ -30,7 +30,7 @@ def score_model():
     plt.xlabel('Predictions', fontsize=18)
     plt.ylabel('Actuals', fontsize=18)
     plt.title('Confusion Matrix', fontsize=18)
-    plt.savefig(os.path.join(model_path, "confusionmatrix.png"))
+    plt.savefig(os.path.join(model_path, "confusionmatrix2.png"))
 
 if __name__ == '__main__':
     score_model()
