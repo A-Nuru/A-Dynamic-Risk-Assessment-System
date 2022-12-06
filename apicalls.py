@@ -16,3 +16,10 @@ response4 = requests.get("%s/diagnostics" % URL, headers=headers).text
 responses = response1 + "\n" + response2 + "\n" + response3 + "\n" + response4
 
 #write the responses to your workspace
+with open('config.json','r') as f:
+    config = json.load(f) 
+model_path = os.path.join(config['output_model_path'])
+
+with open(os.path.join(model_path, "apireturns.txt"), "w") as returns_file:
+    returns_file.write(responses)
+    
