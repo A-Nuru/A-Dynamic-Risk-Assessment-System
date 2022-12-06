@@ -25,7 +25,9 @@ for filename in os.listdir(input_folder_path):
 
 ##################Deciding whether to proceed, part 1
 #if you found new data, you should proceed. otherwise, do end the process here
-
+if not new_files:
+    print("No new ingested data, exiting")
+    exit(0)
 
 ##################Checking for model drift
 #check whether the score from the deployed model is different from the score from the model that uses the newest ingested data
