@@ -45,7 +45,9 @@ with open(os.path.join(model_path, "latestscore.txt"), "r") as report_file:
 
 ##################Deciding whether to proceed, part 2
 #if you found model drift, you should proceed. otherwise, do end the process here
-
+if new_f1 >= old_f1:
+    print("Actual F1 (%s) is better/equal than old F1 (%s), no drift detected -> exiting" % (new_f1, old_f1))    
+    exit(0)
 
 
 ##################Re-deployment
