@@ -13,6 +13,6 @@ response3 = requests.get("%s/summarystats" % URL, headers=headers).text
 response4 = requests.get("%s/diagnostics" % URL, headers=headers).text
 
 #combine all API responses
-
+responses = response1 + "\n" + response2 + "\n" + response3 + "\n" + response4
 
 #write the responses to your workspace
