@@ -49,12 +49,16 @@ if new_f1 >= old_f1:
     print("Actual F1 (%s) is better/equal than old F1 (%s), no drift detected -> exiting" % (new_f1, old_f1))    
     exit(0)
 
+print("Actual F1 (%s) is WORSE than old F1 (%s), drift detected -> training model" % (new_f1, old_f1)) 
+training.train_model()
 
 ##################Re-deployment
 #if you found evidence for model drift, re-run the deployment.py script
+deployment.store_model_into_pickle()
 
 ##################Diagnostics and reporting
 #run diagnostics.py and reporting.py for the re-deployed model
+
 
 
 
