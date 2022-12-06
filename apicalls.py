@@ -7,6 +7,7 @@ URL = "http://127.0.0.1:8000"
 
 #Call each API endpoint and store the responses
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+
 response1 = requests.post("%s/prediction" % URL, json={"dataset_path": "testdata.csv"}, headers=headers).text
 response2 = requests.get("%s/scoring" % URL, headers=headers).text
 response3 = requests.get("%s/summarystats" % URL, headers=headers).text
@@ -20,6 +21,6 @@ with open('config.json','r') as f:
     config = json.load(f) 
 model_path = os.path.join(config['output_model_path'])
 
-with open(os.path.join(model_path, "apireturns.txt"), "w") as returns_file:
+with open(os.path.join(model_path, "apireturns2.txt"), "w") as returns_file:
     returns_file.write(responses)
     
