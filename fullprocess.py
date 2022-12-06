@@ -8,7 +8,6 @@ import reporting
 import ingestion
 import json
 import os
-import apicalls
 import subprocess
 
 with open("config.json", "r") as f:
@@ -70,7 +69,10 @@ diagnostics.missing_data()
 diagnostics.outdated_packages_list()
 reporting.score_model()
 
-#subprocess.run(python2, apicalls.py)
+
+# recalling api resspnses
+subprocess.run(python2, apicalls.py)
+import apicalls
 
 
 
