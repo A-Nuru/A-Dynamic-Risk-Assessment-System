@@ -1,20 +1,18 @@
 import requests
+import os
+import json
 
 #Specify a URL that resolves to your workspace
-URL = "http://127.0.0.1/"
-
-
+URL = "http://127.0.0.1:8000"
 
 #Call each API endpoint and store the responses
-response1 = #put an API call here
-response2 = #put an API call here
-response3 = #put an API call here
-response4 = #put an API call here
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+response1 = requests.post("%s/prediction" % URL, json={"dataset_path": "testdata.csv"}, headers=headers).text
+response2 = requests.get("%s/scoring" % URL, headers=headers).text
+response3 = requests.get("%s/summarystats" % URL, headers=headers).text
+response4 = requests.get("%s/diagnostics" % URL, headers=headers).text
 
 #combine all API responses
-responses = #combine reponses here
+
 
 #write the responses to your workspace
-
-
-
