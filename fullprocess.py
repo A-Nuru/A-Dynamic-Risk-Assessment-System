@@ -8,6 +8,7 @@ import reporting
 import ingestion
 import json
 import os
+import apicalls
 
 input_folder_path = config["input_folder_path"]
 prod_deployment_path = os.path.join(config['prod_deployment_path'])
@@ -56,9 +57,14 @@ training.train_model()
 #if you found evidence for model drift, re-run the deployment.py script
 deployment.store_model_into_pickle()
 
-##################Diagnostics and reporting
+##################Re-Diagnostics and Re-reporting
 #run diagnostics.py and reporting.py for the re-deployed model
-
+diagnostics.model_predictions(None)
+diagnostics.execution_time()
+diagnostics.dataframe_summary()
+diagnostics.missing_data()
+diagnostics.outdated_packages_list()
+reporting.score_model()
 
 
 
